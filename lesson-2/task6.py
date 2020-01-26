@@ -39,7 +39,7 @@ print(goods)
 goods_info = {"название": [], "цена": [], "количество": [], "eд": []}
 for good in goods:
     for key, value in good[1].items():
-        if value not in goods_info.values():
+        if value not in goods_info.get(key):
             goods_info.get(key).append(value)
 
 print(goods_info)
