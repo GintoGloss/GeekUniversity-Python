@@ -1,0 +1,202 @@
+#Просмотреть содержимое директорий /etc, /proc, /home. Посмотреть пару произвольных файлов в /etc.
+
+ginto@ginto-VirtualBox:~$ ls /etc/
+acpi                    hosts                pnm2ppa.conf
+adduser.conf            hosts.allow          polkit-1
+alternatives            hosts.deny           popularity-contest.conf
+anacrontab              hp                   ppp
+apg.conf                ifplugd              profile
+apm                     ImageMagick-6        profile.d
+apparmor                init                 protocols
+apparmor.d              init.d               pulse
+apport                  initramfs-tools      python2.7
+appstream.conf          inputrc              python3
+apt                     insserv.conf.d       python3.6
+avahi                   iproute2             rc0.d
+bash.bashrc             issue                rc1.d
+bash_completion         issue.net            rc2.d
+bash_completion.d       kernel               rc3.d
+bindresvport.blacklist  kernel-img.conf      rc4.d
+binfmt.d                kerneloops.conf      rc5.d
+bluetooth               ldap                 rc6.d
+brlapi.key              ld.so.cache          rcS.d
+brltty                  ld.so.conf           resolvconf
+brltty.conf             ld.so.conf.d         resolv.conf
+ca-certificates         legal                rmt
+ca-certificates.conf    libao.conf           rpc
+calendar                libaudit.conf        rsyslog.conf
+chatscripts             libblockdev          rsyslog.d
+console-setup           libnl-3              sane.d
+cracklib                libpaper.d           securetty
+cron.d                  lintianrc            security
+cron.daily              locale.alias         selinux
+cron.hourly             locale.gen           sensors3.conf
+cron.monthly            localtime            sensors.d
+crontab                 logcheck             services
+cron.weekly             login.defs           shadow
+cups                    logrotate.conf       shadow-
+cupshelpers             logrotate.d          shells
+dbus-1                  lsb-release          skel
+dconf                   ltrace.conf          speech-dispatcher
+debconf.conf            machine-id           ssh
+debian_version          magic                ssl
+default                 magic.mime           subgid
+deluser.conf            mailcap              subgid-
+depmod.d                mailcap.order        subuid
+dhcp                    manpath.config       subuid-
+dictionaries-common     mc                   sudoers
+dpkg                    mime.types           sudoers.d
+emacs                   mke2fs.conf          sysctl.conf
+environment             modprobe.d           sysctl.d
+firefox                 modules              systemd
+fonts                   modules-load.d       terminfo
+fstab                   mtab                 thermald
+fuse.conf               mtools.conf          timezone
+fwupd                   nanorc               tmpfiles.d
+gai.conf                netplan              ucf.conf
+gdb                     network              udev
+gdm3                    networkd-dispatcher  udisks2
+geoclue                 NetworkManager       ufw
+ghostscript             networks             updatedb.conf
+glvnd                   newt                 update-manager
+gnome                   nsswitch.conf        update-motd.d
+groff                   opt                  update-notifier
+group                   os-release           UPower
+group-                  PackageKit           usb_modeswitch.conf
+grub.d                  pam.conf             usb_modeswitch.d
+gshadow                 pam.d                vim
+gshadow-                papersize            vtrgb
+gss                     passwd               wgetrc
+gtk-2.0                 passwd-              wpa_supplicant
+gtk-3.0                 pcmcia               X11
+hdparm.conf             perl                 xdg
+host.conf               pki                  zsh_command_not_found
+hostname                pm
+ginto@ginto-VirtualBox:~$ ls /proc/
+1     1320  1399  19    29   6    888          interrupts    sched_debug
+10    1324  14    2     3    643  890          iomem         schedstat
+1016  1330  140   20    30   646  9            ioports       scsi
+1024  1338  1404  2015  311  647  903          irq           self
+11    134   141   2016  317  648  909          kallsyms      slabinfo
+12    1344  1418  2074  319  649  911          kcore         softirqs
+1228  1347  142   21    32   650  942          keys          stat
+123   135   143   216   320  657  acpi         key-users     swaps
+124   1350  144   217   322  665  asound       kmsg          sys
+125   1351  1443  218   323  671  buddyinfo    kpagecgroup   sysrq-trigger
+126   1354  147   22    324  673  bus          kpagecount    sysvipc
+127   1356  15    23    326  730  cgroups      kpageflags    thread-self
+128   136   1536  24    327  744  cmdline      loadavg       timer_list
+1288  1360  1562  2448  328  745  consoles     locks         tty
+129   1361  1563  2451  346  748  cpuinfo      mdstat        uptime
+1293  1362  158   2468  359  749  crypto       meminfo       version
+1297  1368  16    248   360  758  devices      misc          version_signature
+13    1372  1685  249   377  803  diskstats    modules       vmallocinfo
+130   1375  1686  25    4    812  dma          mounts        vmstat
+1300  1376  17    250   5    824  driver       mtrr          zoneinfo
+1302  139   177   26    531  837  execdomains  net
+131   1393  178   27    532  838  fb           pagetypeinfo
+1314  1394  179   28    552  875  filesystems  partitions
+1317  1395  18    287   555  876  fs           pressure
+ginto@ginto-VirtualBox:~$ ls /home/
+ginto
+ginto@ginto-VirtualBox:~$ cat /etc/hosts
+127.0.0.1       localhost
+127.0.1.1       ginto-VirtualBox
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ginto@ginto-VirtualBox:~$ cat /etc/profile
+# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+
+if [ "${PS1-}" ]; then
+  if [ "${BASH-}" ] && [ "$BASH" != "/bin/sh" ]; then
+    # The file bash.bashrc already sets the default PS1.
+    # PS1='\h:\w\$ '
+    if [ -f /etc/bash.bashrc ]; then
+      . /etc/bash.bashrc
+    fi
+  else
+    if [ "`id -u`" -eq 0 ]; then
+      PS1='# '
+    else
+      PS1='$ '
+    fi
+  fi
+fi
+
+if [ -d /etc/profile.d ]; then
+  for i in /etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+  unset i
+fi
+ginto@ginto-VirtualBox:~$
+
+
+#Выяснить, для чего предназначена команда cat. Используя данную команду, создать два файла с данными, а затем объединить их. Просмотреть содержимое созданного файла. Переименовать файл, дав ему новое имя.
+
+ginto@ginto-VirtualBox:~$ man cat
+ginto@ginto-VirtualBox:~$ cat > file1
+file1
+ginto@ginto-VirtualBox:~$ ls
+Desktop    Downloads  Music     Public     Videos
+Documents  file1      Pictures  Templates
+ginto@ginto-VirtualBox:~$ cat > file2
+file2
+ginto@ginto-VirtualBox:~$ cat file1 file2 > file3
+ginto@ginto-VirtualBox:~$ cat file3
+file1
+file2
+ginto@ginto-VirtualBox:~$ mv file3 renamedfile
+ginto@ginto-VirtualBox:~$ ls
+Desktop    Downloads  file2  Pictures  renamedfile  Videos
+Documents  file1      Music  Public    Templates
+ginto@ginto-VirtualBox:~$
+
+Создать несколько файлов. Создать директорию, переместить файл туда. Удалить все созданные в этом и предыдущем задании директории и файлы.
+
+ginto@ginto-VirtualBox:~$ mkdir folder
+ginto@ginto-VirtualBox:~$ touch my_file1 my_file2 my_file3
+ginto@ginto-VirtualBox:~$ ls
+Desktop    Downloads  Music     my_file2  Pictures  Templates
+Documents  folder     my_file1  my_file3  Public    Videos
+ginto@ginto-VirtualBox:~$ mv my_* folder/
+ginto@ginto-VirtualBox:~$ ls
+Desktop    Downloads  Music     Public     Videos
+Documents  folder     Pictures  Templates
+ginto@ginto-VirtualBox:~$ ls folder/
+my_file1  my_file2  my_file3
+ginto@ginto-VirtualBox:~$ rm -rf folder/
+ginto@ginto-VirtualBox:~$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+ginto@ginto-VirtualBox:~$
+
+В ОС Linux скрытыми файлами считаются те, имена которых начинаются с символа “.”. Сколько скрытых файлов в вашем домашнем каталоге? (Использовать конвейер. Подсказка: для подсчета количества строк можно использовать wc.)
+
+ginto@ginto-VirtualBox:~$ ls -d .* | wc -l
+14
+
+Попробовать вывести с помощью cat все файлы в директории /etc. Направить ошибки в отдельный файл в вашей домашней директории. Сколько файлов, которые не удалось посмотреть, оказалось в списке?
+ginto@ginto-VirtualBox:~$ cat /etc/* > output 2> errors
+ginto@ginto-VirtualBox:~$ wc -l errors
+126 errors
+
+Запустить в одном терминале программу, а в другом терминале посмотреть PID процесса и остановить с помощью kill, посылая разные типы сигналов. Что происходит?
+
+ginto@ginto-VirtualBox:~$ nano my_file
+ginto@ginto-VirtualBox:~$ kill -15 2828
+ginto@ginto-VirtualBox:~$
+Received SIGHUP or SIGTERM
+ginto@ginto-VirtualBox:~$
+ginto@ginto-VirtualBox:~$ kill -2 2830
+#Ничего не произошло, так как в nano сочетание клавиш Ctrl-C не завершает программу, а используется для определения позиции курсора.
+ginto@ginto-VirtualBox:~$ kill -9 2830
+Killed
+ginto@ginto-VirtualBox:~$
