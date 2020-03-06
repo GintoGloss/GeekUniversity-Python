@@ -1,0 +1,77 @@
+Создать файл file1 и наполнить его произвольным содержимым. Скопировать его в file2. Создать символическую ссылку file3 на file1. Создать жесткую ссылку file4 на file1. 
+Посмотреть, какие айноды у файлов. Удалить file1. Что стало с остальными созданными файлами? Попробовать вывести их на экран.
+
+ginto@ginto-VirtualBox:~$ cat > file1
+random
+content
+12345
+^C
+ginto@ginto-VirtualBox:~$ cat file1 > file2
+ginto@ginto-VirtualBox:~$ ln -s file1 file3
+ginto@ginto-VirtualBox:~$ ln file1 file4
+ginto@ginto-VirtualBox:~$ ls -ila file*
+238925 -rw-r--r-- 2 ginto ginto 21 мар  6 18:00 file1
+192575 -rw-rw-r-- 1 ginto ginto 21 мар  6 18:03 file2
+166346 lrwxrwxrwx 1 ginto ginto  5 мар  6 18:10 file3 -> file1
+238925 -rw-r--r-- 2 ginto ginto 21 мар  6 18:00 file4
+ginto@ginto-VirtualBox:~$ rm file1
+ginto@ginto-VirtualBox:~$ cat file2
+random
+content
+12345
+ginto@ginto-VirtualBox:~$ cat file3
+cat: file3: No such file or directory
+ginto@ginto-VirtualBox:~$ cat file4
+random
+content
+12345
+
+Дать созданным файлам другие, произвольные имена. Создать новую символическую ссылку. Переместить ссылки в другую директорию.
+
+ginto@ginto-VirtualBox:~$ mv file2 somefile
+ginto@ginto-VirtualBox:~$ mv file4 randomfile
+ln -s randomfile  new_link
+ginto@ginto-VirtualBox:~$ mv file3 Desktop/
+ginto@ginto-VirtualBox:~$ mv new_link Desktop/
+ginto@ginto-VirtualBox:~$ ls Desktop/
+file3  new_link
+ginto@ginto-VirtualBox:~$ cat Desktop/new_link
+cat: Desktop/new_link: No such file or directory
+ginto@ginto-VirtualBox:~$
+
+Создать два произвольных файла. Первому присвоить права на чтение, запись для владельца и группы, только на чтение — для всех.
+Второму присвоить права на чтение, запись — только для владельца. Сделать это в численном и символьном виде.
+
+ginto@ginto-VirtualBox:~$ chmod ug=rw,o=r somefile
+ginto@ginto-VirtualBox:~$ chmod 600 randomfile
+ginto@ginto-VirtualBox:~$ ls -l randomfile
+-rw------- 1 ginto ginto 21 мар  6 18:00 randomfile
+ginto@ginto-VirtualBox:~$
+ginto@ginto-VirtualBox:~$ useradd -G sudo myuser
+
+Создать пользователя, обладающего возможностью выполнять действия от имени суперпользователя.
+
+ginto@ginto-VirtualBox:~$ sudo useradd -G sudo myuser1 -s /bin/bash
+ginto@ginto-VirtualBox:~$ sudo passwd myuser1
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+
+myuser1@ginto-VirtualBox:/$ sudo apt update
+[sudo] password for myuser1:
+Get:1 http://security.ubuntu.com/ubuntu bionic-security InRelease [88,7 kB]
+Hit:2 http://ru.archive.ubuntu.com/ubuntu bionic InRelease
+Get:3 http://ru.archive.ubuntu.com/ubuntu bionic-updates InRelease [88,7 kB]
+Get:4 http://ru.archive.ubuntu.com/ubuntu bionic-backports InRelease [74,6 kB]
+Get:5 http://security.ubuntu.com/ubuntu bionic-security/main amd64 DEP-11 Metadata [38,5 kB]
+Get:6 http://security.ubuntu.com/ubuntu bionic-security/main DEP-11 48x48 Icons [17,6 kB]
+Get:7 http://security.ubuntu.com/ubuntu bionic-security/main DEP-11 64x64 Icons [41,5 kB]
+Get:8 http://security.ubuntu.com/ubuntu bionic-security/universe amd64 DEP-11 Metadata [42,1 kB]
+Get:9 http://security.ubuntu.com/ubuntu bionic-security/universe DEP-11 64x64 Icons [116 kB]
+Get:10 http://security.ubuntu.com/ubuntu bionic-security/multiverse amd64 DEP-11 Metadata [2 464 B]
+Fetched 511 kB in 2s (267 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+10 packages can be upgraded. Run 'apt list --upgradable' to see them.
+
